@@ -8,11 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+      'another': '#818085',
+      },
+      screens: {
+      'mobile-sm': '375px',
+    },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        mono: ['var(--font-montserrat)']
+      }
     },
   },
   plugins: [],

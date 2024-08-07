@@ -1,0 +1,9 @@
+.main {
+  background: url("./../../public/background-plat.svg") no-repeat center
+}
+
+.main-darken {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./../../public/background-plat.svg") no-repeat center
+}
+
+
