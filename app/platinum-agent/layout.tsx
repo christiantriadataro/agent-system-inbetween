@@ -3,34 +3,27 @@ import "./styles.css";
 import menu from "../../public/menu.svg"
 import Image from "next/image";
 import arrowDown from "../../public/down-arrow.svg";
-import { useState } from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import {ReactNode, useState} from "react";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import {getAdminUserDetails} from "@/helpers/api/admin/getAdminUserDetails";
+import {getPlatinumUserDetails} from "@/helpers/api/PlatinumUsers/getPlatinumUserDetails";
 
-const PlatinumLayout = ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  }
-  
-
-  return (
-    
-    <div className="main-darken overflow-hidden border border-black h-screen ">
-      <Header handleMenu={handleMenu} />
-      <div className="flex flex-col relative h-full">
-        <Sidebar isMenuOpen={isMenuOpen} />
-        <div className="w-full">
-          {children}
+const PlatinumLayout = ({children}: Readonly<{ children: ReactNode; }>) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const handleMenu = () => setIsMenuOpen(!isMenuOpen);
+    return (
+        <div className="background-primary-plat overflow-hidden border border-black h-screen ">
+            <Header handleMenu={handleMenu} handleDetails={getPlatinumUserDetails} logoutLink="/platinum-agent/login"/>
+            <div className="flex flex-row relative h-full">
+                <Sidebar isMenuOpen={isMenuOpen} variant="admin"/>
+                <div
+                    className={`${!isMenuOpen ? "-translate-x-40 " : ""} transition duration-300 w-full`}>
+                    {children}
+                </div>
+            </div>
         </div>
-      </div>
-   </div>
-  );
+    );
 }
 
 

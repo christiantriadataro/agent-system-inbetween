@@ -1,6 +1,6 @@
 import Image from "next/image"
 import MoneyIcon from "../../../public/money-icon.svg"
-import ActionButton from "@/app/components/ActionButton"
+import ActionButton from "@/components/ActionButton"
 
 { 
 

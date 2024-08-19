@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .black-linear-vertical {
+    @apply bg-gradient-to-t from-[#24242E] to-[#131217];
+  }
+}
+
+.btn-primary-admin {
+    background: url("../public/buttonbackgroundAdmin.svg") no-repeat center;
+    background-size: cover;
+}
+
+.btn-primary-plat {
+    background: url("../public/buttonbackgroundPlat.svg") no-repeat center;
+    background-size: cover;
+}
+
+.btn-primary-gold {
+    background: url("../public/buttonbackground.svg") no-repeat center;
+    background-size: cover;
+}
+
+.btn-primary-silver {
+    background: url("../public/buttonbackgroundSilver.svg") no-repeat center
+}
+
+.btn-primary-player {
+    background: url("../public/buttonbackgroundPlayer.svg") no-repeat center
+}
+
+.btn-primary-cancel {
+    background: url("../public/buttonbackgroundCancel.svg") no-repeat center
+}
+
+.background-primary-plat {
+    background: url("../public/RegistrationBackgroundPlat.svg");
+    background-size: cover;
+}
+
+.background-primary-admin {
+    background: url("../public/RegistrationBackgroundAdmin.svg");
+    background-size: cover;
+}
+
+.background-primary-gold {
+        background: url("../public/RegistrationBackgroundGold.svg");
+        background-size: cover;
+}
+
+.background-primary-silver {
+        background: url("../public/RegistrationBackgroundSilver.svg");
+        background-size: cover;
+}
+
+.background-primary-player {
+        background: url("../public/RegistrationBackgroundPlayer.svg");
+        background-size: cover;
+}
