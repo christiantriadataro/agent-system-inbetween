@@ -4,7 +4,7 @@ import CustomWhiteInput from "@/components/CustomWhiteInput";
 import CustomInputGroup from "@/components/CustomInputGroup";
 import ButtomPrimary from "@/components/ButtomPrimary";
 import postAdmin from "@/helpers/api/admin/postAdmin";
-import {useState} from "react";
+import {ChangeEvent, FormEvent, useState} from "react";
 import CustomButton from "@/components/CustomButton";
 import {useRouter} from "next/navigation";
 
@@ -21,16 +21,16 @@ const initialState = {
 const Register = () => {
     const [user, setUser] = useState(initialState)
     const [checkPassword, setCheckPassword] = useState("")
-    const handleUsernameChange = event => setUser({...user, username: event.target.value,});
-    const handleFirstNameChange = event => setUser({...user, firstName: event.target.value,});
-    const handleLastNameChange = event => setUser({...user, lastName: event.target.value,});
-    const handlePasswordChange = event => setUser({...user, password: event.target.value,});
-    const handleLocationChange = event => setUser({...user, location: event.target.value,});
-    const handleMobileNumberChange = event => setUser({...user, mobileNumber: event.target.value,});
-    const handleConfirmPasswordChange = event => setCheckPassword(event.target.value);
+    const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => setUser({...user, username: event.target.value,});
+    const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => setUser({...user, firstName: event.target.value,});
+    const handleLastNameChange = (event: ChangeEvent<HTMLInputElement>) => setUser({...user, lastName: event.target.value,});
+    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => setUser({...user, password: event.target.value,});
+    const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => setUser({...user, location: event.target.value,});
+    const handleMobileNumberChange = (event: ChangeEvent<HTMLInputElement>) => setUser({...user, mobileNumber: event.target.value,});
+    const handleConfirmPasswordChange = (event: ChangeEvent<HTMLInputElement>) => setCheckPassword(event.target.value);
     const router = useRouter();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: FormEvent) => {
         try {
             event.preventDefault();
             const response = await postAdmin(user)
@@ -58,7 +58,7 @@ const Register = () => {
                 </CustomInputGroup>
                 <CustomWhiteInput placeholder="Location" onChange={handleLocationChange}/>
                 <CustomWhiteInput placeholder="Mobile Number: " onChange={handleMobileNumberChange}/>
-                <ButtomPrimary text="Register"/>
+                <ButtomPrimary text="Register" variant="gold"/>
             </form>
         </div>
     )

@@ -3,7 +3,7 @@ import CustomInput from "@/components/CustomInput";
 import backgroundImage from "../../../../public/background-plat.svg"
 import "@/styles/globals.css"
 import CustomButton from "@/components/CustomButton";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, FormEvent, useState} from "react";
 import CustomWhiteInput from "@/components/CustomWhiteInput";
 import ButtomPrimary from "@/components/ButtomPrimary";
 import {AdminLogin} from "@/helpers/api/admin/auth"
@@ -18,7 +18,7 @@ const Login = () => {
     const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value);
     const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
 
-    const handleSubmit = async event => {
+    const handleSubmit = async (event: FormEvent) => {
         try {
             event.preventDefault();
             const response = await GoldLogin(username, password);

@@ -113,7 +113,7 @@ const AdminDashboardPage = () => {
                         <CreatePlatinumUserForm/>
                     </DialogContent>
                 </Dialog>
-                <CopyLinkButton id={linkId}  />
+                <CopyLinkButton id={linkId}   link="platinum-agent" variant="admin"/>
             </div>
             <div className="p-4 bg-black/50 mt-20">
                <Tabs defaultValue="admin-users" className="w-full text-white ">

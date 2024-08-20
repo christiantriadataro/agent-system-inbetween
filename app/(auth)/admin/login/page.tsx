@@ -14,7 +14,7 @@ const AdminLoginPage = () => {
     const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value);
     const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>)  => setPassword(event.target.value);
 
-    const handleSubmit = async (event)  => {
+    const handleSubmit = async (event: FormEvent)  => {
         try {
             event.preventDefault();
             const response = await AdminLogin(username, password);
