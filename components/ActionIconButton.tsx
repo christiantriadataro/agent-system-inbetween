@@ -1,7 +1,7 @@
-import {SVGProps} from "react";
+import {ReactNode} from "react";
 
 interface ActionIconButton {
-  icon: SVGProps<SVGSVGElement> ,
+  icon: ReactNode,
   variant: string
 }
 const ActionIconButton = ({ icon, variant="admin" }:ActionIconButton) => {

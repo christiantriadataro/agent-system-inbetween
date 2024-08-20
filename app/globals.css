@@ -14,7 +14,7 @@
 }
 
 .btn-primary-plat {
-    background: url("../public/buttonbackgroundPlat.svg") no-repeat center;
+    background: url("../public/buttonBackgroundPlat.svg") no-repeat center;
     background-size: cover;
 }
 

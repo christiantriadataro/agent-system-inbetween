@@ -1,5 +1,5 @@
 "use client";
-import "@/styles/globals.css";
+import "@/app/globals.css";
 import {useState, ReactNode} from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";

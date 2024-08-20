@@ -1,4 +1,9 @@
-const Card = ({ title,  amount }) => {
+interface CardProps  {
+    title: string,
+    amount: string
+}
+
+const Card = ({ title,  amount }: CardProps) => {
   return (
       <div className="card bg-opacity-70 border border-black bg-[#E6E5E8] w-full h-24 rounded-md px-1.5">
           <div className="text-xs font-semibold mt-2 text-center">{ title }</div>

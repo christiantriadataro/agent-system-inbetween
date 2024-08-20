@@ -1,7 +1,7 @@
 "use client"
 import CustomInput from "@/components/CustomInput";
 import backgroundImage from "../../../../public/background-plat.svg"
-import "@/styles/globals.css"
+import "@/app/globals.css"
 import CustomButton from "@/components/CustomButton";
 import {ChangeEvent, FormEvent, useState} from "react";
 import CustomWhiteInput from "@/components/CustomWhiteInput";

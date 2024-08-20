@@ -1,5 +1,5 @@
 "use client"
-import "@/styles/globals.css"
+import "@/app/globals.css"
 import {useState, ChangeEvent, FormEvent} from "react";
 import CustomWhiteInput from "@/components/CustomWhiteInput";
 import ButtomPrimary from "@/components/ButtomPrimary";

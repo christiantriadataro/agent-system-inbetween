@@ -9,6 +9,7 @@ import {AxiosResponse} from "axios";
 
 
 
+
 const LoadBalanceForm = ({_id, handleApi}: {_id: string, handleApi: any}) => {
     const [loadUser, setLoadUser] = useState({
         _id: "",
@@ -37,7 +38,7 @@ const LoadBalanceForm = ({_id, handleApi}: {_id: string, handleApi: any}) => {
 
     return (
         <form  onSubmit={handleSubmit}>
-            <InputwithLabel label="Add Balance" handleDataChange={handleBalanceChange} value={loadUser.balance} />
+            <InputwithLabel label="Add Balance" handleDataChange={handleBalanceChange} value={String(loadUser.balance)} />
             <div className="flex justify-center items-center gap-8 mt-5">
                 {/*<button*/}
                 {/*        className={`btn-primary-cancel border-2 border-black px-9 py-2 rounded-md text-xs text-black font-semibold`}>*/}

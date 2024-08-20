@@ -1,4 +1,12 @@
-const CustomWhiteInput = ({ type = 'text', placeholder, onChange }) => {
+import {ChangeEvent} from "react";
+
+interface CustomWhiteInputProps {
+    type?: string,
+    placeholder: string,
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
+}
+
+const CustomWhiteInput = ({ type = 'text', placeholder, onChange }: CustomWhiteInputProps) => {
   return (
      <input
          type={type}
