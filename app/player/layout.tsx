@@ -8,7 +8,8 @@ import {getPlayerDetails} from "@/helpers/api/players/getPlayerDetails";
 const initialUserDetails = {
     _id: "",
     username: "",
-    balance: 0
+    balance: 0,
+    parent: ""
 }
 
 

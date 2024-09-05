@@ -8,7 +8,8 @@ import {getGoldUserDetails} from "@/helpers/api/GoldUsers/getGoldUserDetails";
 const initialUserDetails = {
     _id: "",
     username: "",
-    balance: 0
+    balance: 0,
+    parent: ""
 }
 
 const PlatinumLayout = ({children}: Readonly<{ children: ReactNode; }>) => {
