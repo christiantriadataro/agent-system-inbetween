@@ -6,7 +6,7 @@ export const POST = async (request: NextRequest) => {
     try {
         await connect();
         const requestBody = await request.json();
-        const status = "pending"
+        const status = "pending";
         const {from, to, type, amount, remarks} = requestBody;
 
         const requestPlayer = new RequestPlayer({
@@ -19,7 +19,7 @@ export const POST = async (request: NextRequest) => {
         })
 
         const savedRequestPlayer = await requestPlayer.save();
-
+        console.log("success", savedRequestPlayer)
         return NextResponse.json({
             message: "Request Player created successfully",
             success: true,

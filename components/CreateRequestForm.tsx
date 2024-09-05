@@ -1,20 +1,30 @@
 import InputwithLabel from "@/components/InputwithLabel";
 import CustomInputGroup from "@/components/CustomInputGroup";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, FormEvent, useState} from "react";
 import CustomButton from "@/components/CustomButton";
 import {DialogClose} from "@/components/ui/dialog";
-import postSilverUser from "@/helpers/api/SilverUsers/postSilverUser";
 import SelectwithLabel from "@/components/SelectwithLabel";
+import postRequestPlayer from "@/helpers/api/players/postRequestPlayer";
 
 const options = [
     {name: "Load", value: "load"},
     {name: "Withdraw", value: "withdraw"}
 ]
 
-const CreateRequestForm = ({variant}: { variant: string }) => {
+interface RequestFormProps {
+    variant: string,
+    userDetails: {
+        _id: string,
+        parent: string,
+        balance: number,
+        username: string
+    }
+}
+
+const CreateRequestForm = ({userDetails, variant}: RequestFormProps) => {
     const [requestForm, setRequestForm] = useState({
-        from: "",
-        to: "",
+        from: userDetails._id,
+        to: userDetails.parent,
         type: "",
         amount: "",
         remarks: ""
@@ -40,10 +50,11 @@ const CreateRequestForm = ({variant}: { variant: string }) => {
         remarks: event.target.value
     })
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (event: FormEvent) => {
         try {
-            const response = await postSilverUser(requestForm)
-            console.log("Request Form Created", response.data);
+            const response = await postRequestPlayer(requestForm)
+            // console.log("Request Form Created", response.data);
+            console.log(requestForm)
         } catch (error: any) {
             console.log("Failed to Create a Request Form", error.message);
         }
@@ -57,9 +68,9 @@ const CreateRequestForm = ({variant}: { variant: string }) => {
         <form onSubmit={handleSubmit}>
             <CustomInputGroup>
                 <InputwithLabel label="From" handleDataChange={handleFromChange} disabled={true}
-                                value="ChanSilverAgentLink"/>
+                                value={userDetails.username}/>
                 <InputwithLabel label="To" handleDataChange={handleToChange} disabled={true}
-                                value="ChanPlayerAgentLink"/>
+                                value={userDetails.parent}/>
             </CustomInputGroup>
             <SelectwithLabel label="Type" values={options} handleDataChange={handleTypeChange}/>
             <InputwithLabel label="Amount" text="number" handleDataChange={handleAmountChange}/>
