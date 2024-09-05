@@ -3,7 +3,7 @@ import {Input} from "@/components/ui/input";
 import {useState} from "react";
 
 const CopyLinkButton = ({id, variant="admin", link="platinum-agent"}: {id: string, variant: string, link: string}) => {
-    const url = `http://localhost:3001/${link}/signup/${id}`
+    const url = `https://${process.env.URL}/${link}/signup/${id}`
     const [isCopied, setCopied] = useState(false);
     const handleCopy = () => {
         navigator.clipboard.writeText(url).then(() => setCopied(true));
