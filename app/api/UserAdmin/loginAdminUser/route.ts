@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {connect} from "@/helpers/databaseConfig";
+import {connect} from "@/helpers/utils/databaseConfig";
 import UserAdmin from "@/models/UserAdminDTO"
 import jwt from "jsonwebtoken";
 

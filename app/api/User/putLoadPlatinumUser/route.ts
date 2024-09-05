@@ -1,5 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import PlatinumUser from "@/models/PlatinumUserDTO";
+import UserAdmin from "@/models/UserAdminDTO";
 
 
 export const PUT = async (
@@ -7,7 +8,11 @@ export const PUT = async (
 ) => {
     try {
         const body = await request.json();
-        const {_id, balance} = body;
+        const {_id, balance, parent} = body;
+        const parentUser = await UserAdmin.findOne({_id: parent})
+        parentUser.balance = parentUser.balance - parseInt(balance)
+        await parentUser.save()
+
         const updatedPlatUser = await PlatinumUser.findById({_id});
         updatedPlatUser.balance = updatedPlatUser.balance + parseInt(balance)
         await updatedPlatUser.save()

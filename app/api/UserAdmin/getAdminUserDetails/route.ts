@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {getDataFromToken} from "@/helpers/getDataFromToken";
+import {getDataFromToken} from "@/helpers/utils/getDataFromToken";
 import UserAdmin from "@/models/UserAdminDTO"
 
 export const GET = async (request: NextRequest) => {

@@ -1,30 +1,33 @@
 import InputwithLabel from "@/components/InputwithLabel";
-import CustomInputGroup from "@/components/CustomInputGroup";
-import {ChangeEvent, useEffect, useLayoutEffect, useState} from "react";
+import {ChangeEvent, useLayoutEffect, useState} from "react";
 import CustomButton from "@/components/CustomButton";
-import postPlatinumUser from "@/helpers/api/PlatinumUsers/postPlatinumUser";
-import putLoadPlatinumUser from "@/helpers/api/PlatinumUsers/putLoadPlatinumUser";
-import putLoadAdminUser from "@/helpers/api/admin/putLoadAdminUser";
-import {AxiosResponse} from "axios";
 
 
-
-
-const LoadBalanceForm = ({_id, handleApi}: {_id: string, handleApi: any}) => {
+const LoadBalanceForm = ({variant, parentId, _id, handleApi}: {
+    variant: string,
+    parentId: string,
+    _id: string,
+    handleApi: any
+}) => {
     const [loadUser, setLoadUser] = useState({
         _id: "",
-        balance: 0
+        balance: 0,
+        parent: ""
     })
-    const handleBalanceChange = (event: ChangeEvent<HTMLInputElement>) => setLoadUser({...loadUser, balance: parseInt(event.target.value)})
+    const handleBalanceChange = (event: ChangeEvent<HTMLInputElement>) => setLoadUser({
+        ...loadUser,
+        balance: parseInt(event.target.value)
+    })
     console.log(loadUser)
 
     useLayoutEffect(() => {
         if (loadUser._id === "") {
-            setLoadUser({_id, balance: 0})
+            setLoadUser({_id, balance: 0, parent: parentId})
         } else {
             return;
         }
     }, []);
+
 
     const handleSubmit = async () => {
         try {
@@ -37,14 +40,11 @@ const LoadBalanceForm = ({_id, handleApi}: {_id: string, handleApi: any}) => {
     }
 
     return (
-        <form  onSubmit={handleSubmit}>
-            <InputwithLabel label="Add Balance" handleDataChange={handleBalanceChange} value={String(loadUser.balance)} />
+        <form onSubmit={handleSubmit}>
+            <InputwithLabel label="Add Balance" handleDataChange={handleBalanceChange}
+                            value={String(loadUser.balance)}/>
             <div className="flex justify-center items-center gap-8 mt-5">
-                {/*<button*/}
-                {/*        className={`btn-primary-cancel border-2 border-black px-9 py-2 rounded-md text-xs text-black font-semibold`}>*/}
-                {/*    Cancel*/}
-                {/*</button>*/}
-                <CustomButton variant="plat" text="Confirm"/>
+                <CustomButton variant={variant} text="Confirm"/>
             </div>
         </form>
     )

@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {connect} from "../../databaseConfig.js";
+import {connect} from "../../utils/databaseConfig.js";
 import UserAdmin from "../../../models/UserAdminDTO.js";
 import axios from "axios";
 

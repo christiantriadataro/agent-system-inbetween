@@ -56,13 +56,3 @@ const Sidebar = ({isMenuOpen, variant="admin"}: SidebarProps) => {
 
 export default Sidebar;
 
-{/*    <Link href="/platinum-agent/gold-agents"*/
-}
-{/*          className="rounded-lg text-another border-2 border-another  p-3 h-[44px]">Gold Agents</Link>*/
-}
-{/*    <Link href="/platinum-agent/my-reports"*/
-}
-{/*          className="rounded-lg text-another border-2 border-another  p-3 h-[44px]">My Reports</Link>*/
-}
-{/*</div>*/
-}

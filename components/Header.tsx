@@ -11,39 +11,22 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {AdminLogout} from "@/helpers/api/admin/auth";
 import {useRouter} from "next/navigation";
-import {memo, useCallback, useLayoutEffect, useMemo, useState} from "react";
+import {memo, useCallback, useContext, useLayoutEffect, useMemo, useState} from "react";
 import {getAdminUserDetails} from "@/helpers/api/admin/getAdminUserDetails";
-import {format} from "@/helpers/format";
+import {format} from "@/helpers/utils/format";
 import {AxiosResponse} from "axios";
+import UserContext from "@/helpers/context/admin/UserDetails";
 
 
 interface HeaderProps {
-    handleMenu: () => void,
-    handleDetails: () => any,
     logoutLink: string
 }
 
-const initialUserDetails = {
-    _id: "",
-    username: "",
-    balance: 0
-}
 
-const Header = ({handleMenu, handleDetails, logoutLink}: HeaderProps) => {
+
+const Header = ({logoutLink}: HeaderProps) => {
     const router = useRouter();
-    const [userDetails, setUserDetails] = useState(initialUserDetails);
-
-    const handleAdminUserDetails = async () => {
-        try {
-            // if (userDetails.username == "") return;getAdminUserDetails
-            const response = await handleDetails();
-            console.log("handleAdminUserDetails", response.data);
-            setUserDetails(response.data.data);
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    }
-  
+    const userDetails = useContext(UserContext)
 
     const handleLogout = async () => {
         try {
@@ -55,15 +38,11 @@ const Header = ({handleMenu, handleDetails, logoutLink}: HeaderProps) => {
         }
     }
 
-    useLayoutEffect(() => {
-        handleAdminUserDetails();
-    }, [])
-
     return (
         <nav
             className="h-[51px] w-full text-white black-linear-vertical rounded-b-md flex items-center justify-between pl-2 pr-4 lg:pr-7 xl:pr-20 lg:pl-5 xl:pl-6 text-sm">
             <div className="flex gap-4 items-center">
-                <button onClick={handleMenu}>
+                <button>
                     <Image src={menu} alt=""/>
                 </button>
                 <div className="rounded-2xl border-2 border-another px-6 py-[2px] font-medium">

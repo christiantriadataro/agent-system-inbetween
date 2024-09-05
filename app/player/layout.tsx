@@ -2,8 +2,8 @@
 import "./styles.css";
 import {ReactNode, useLayoutEffect, useState} from "react";
 import Header from "@/components/Header";
-import {getSilverUserDetails} from "@/helpers/api/SilverUsers/getSilverUserDetails";
 import UserContext from "@/helpers/context/admin/UserDetails";
+import {getPlayerDetails} from "@/helpers/api/players/getPlayerDetails";
 
 const initialUserDetails = {
     _id: "",
@@ -12,14 +12,14 @@ const initialUserDetails = {
 }
 
 
-const SilverLayout = ({children}: Readonly<{ children: ReactNode; }>) => {
+const PlayerLayout = ({children}: Readonly<{ children: ReactNode; }>) => {
     // const [isMenuOpen, setIsMenuOpen] = useState(false);
     // const handleMenu = () => setIsMenuOpen(!isMenuOpen);
     const [userDetails, setUserDetails] = useState(initialUserDetails);
 
     const handleSilverUserDetails = async () => {
         try {
-            const response = await getSilverUserDetails();
+            const response = await getPlayerDetails();
             setUserDetails(response.data.data);
         } catch (error: any) {
             console.log(error.message);
@@ -32,8 +32,8 @@ const SilverLayout = ({children}: Readonly<{ children: ReactNode; }>) => {
 
     return (
         <UserContext.Provider value={userDetails}>
-            <div className="background-primary-silver overflow-hidden border border-black h-screen ">
-                <Header logoutLink="/silver-agent/login"/>
+            <div className="background-primary-player overflow-hidden border border-black h-screen ">
+                <Header logoutLink="/player/login"/>
                 <div className="flex flex-row relative h-full">
                     {/*<Sidebar isMenuOpen={isMenuOpen} variant="admin"/>*/}
                     <div
@@ -47,4 +47,4 @@ const SilverLayout = ({children}: Readonly<{ children: ReactNode; }>) => {
 }
 
 
-export default SilverLayout
+export default PlayerLayout

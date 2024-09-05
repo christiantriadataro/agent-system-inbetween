@@ -1,22 +1,15 @@
 "use client";
-import Card from "@/components/Card"
-import CardDownline from "@/components/CardDownline"
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
-import CreatePlatinumUserForm from "@/components/Platinum-Agent/CreatePlatinumUserForm";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import LoadBalanceForm from "@/components/Platinum-Agent/LoadBalanceForm";
-import putLoadAdminUser from "@/helpers/api/admin/putLoadAdminUser";
-import {format} from "@/helpers/format";
-import putLoadPlatinumUser from "@/helpers/api/PlatinumUsers/putLoadPlatinumUser";
-import {useCallback, useEffect, useState} from "react";
-import {getPlatinumUsers} from "@/helpers/api/PlatinumUsers/getPlatinumUsers";
+import {format} from "@/helpers/utils/format";
+import {useCallback, useContext, useEffect, useState} from "react";
 import getGoldUsers from "@/helpers/api/GoldUsers/getGoldUsers";
 import CreateGoldUserForm from "@/components/Gold-Agent/CreateGoldUserForm";
 import putLoadGoldUser from "@/helpers/api/GoldUsers/putLoadGoldUser";
-import {getAdminUserDetails} from "@/helpers/api/admin/getAdminUserDetails";
 import CopyLinkButton from "@/components/CopyLinkButton";
-import {getPlatinumUserDetails} from "@/helpers/api/PlatinumUsers/getPlatinumUserDetails";
+import UserContext from "@/helpers/context/admin/UserDetails";
 
 interface UserProps {
     _id: string,
@@ -30,7 +23,7 @@ interface UserProps {
 
 const Dashboard = () => {
     const [goldUsers, setGoldUsers] = useState([]);
-    const [linkId, setLinkId] = useState("")
+    const linkId = useContext(UserContext)._id
 
     const handleGetGoldUsers = useCallback(async () => {
         try {
@@ -42,22 +35,8 @@ const Dashboard = () => {
         }
     }, [])
 
-    const handleLinkId = async () => {
-        try {
-            const response = await getPlatinumUserDetails();
-            console.log("link", response.data.data);
-            setLinkId(response.data.data._id);
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    }
-
     useEffect(() => {
         handleGetGoldUsers();
-    }, []);
-
-    useEffect(() => {
-        handleLinkId()
     }, []);
 
     return (
@@ -75,7 +54,7 @@ const Dashboard = () => {
                         <CreateGoldUserForm/>
                     </DialogContent>
                 </Dialog>
-                <CopyLinkButton link="gold-agent" variant="plat"  id={linkId}/>
+                <CopyLinkButton link="gold-agent" variant="plat" id={linkId}/>
             </div>
             <div className="p-4 bg-black/50 mt-20">
                 <Tabs defaultValue="admin-users" className="w-full text-white ">
@@ -107,7 +86,8 @@ const Dashboard = () => {
                                                     <DialogHeader>
                                                         <DialogTitle>Load Platinum User</DialogTitle>
                                                     </DialogHeader>
-                                                    <LoadBalanceForm _id={user._id} handleApi={putLoadGoldUser}/>
+                                                    <LoadBalanceForm variant="gold" parentId={linkId} _id={user._id}
+                                                                     handleApi={putLoadGoldUser}/>
                                                 </DialogContent>
                                             </Dialog>
                                         </TableCell>

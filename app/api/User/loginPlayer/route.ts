@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {connect} from "@/helpers/utils/databaseConfig";
-import GoldUser from "@/models/GoldUserDTO"
+import Player from "@/models/PlayerDTO"
 import jwt from "jsonwebtoken";
 
 export const POST = async (request: NextRequest) => {
@@ -10,13 +10,13 @@ export const POST = async (request: NextRequest) => {
         const {username, password} = requestBody;
         console.log(requestBody);
 
-        const user = await GoldUser.findOne({username});
+        const user = await Player.findOne({username});
         if (!user) {
-            return NextResponse.json({error: "Gold User does not exist"}, {status: 400})
+            return NextResponse.json({error: "Player does not exist"}, {status: 400})
         }
 
         if (password !== user.password) {
-            return NextResponse.json({ error: "Invalid Password"}, {status: 400})
+            return NextResponse.json({error: "Invalid Password"}, {status: 400})
         }
 
         const tokenData = {
@@ -40,6 +40,6 @@ export const POST = async (request: NextRequest) => {
         return response
 
     } catch (error: any) {
-        return NextResponse.json( {error: error.message }, { status: 500 })
+        return NextResponse.json({error: error.message}, {status: 500})
     }
 }

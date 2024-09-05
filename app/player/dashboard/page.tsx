@@ -6,10 +6,10 @@ import LoadBalanceForm from "@/components/Platinum-Agent/LoadBalanceForm";
 import {format} from "@/helpers/utils/format";
 import {useCallback, useContext, useEffect, useState} from "react";
 import getPlayers from "@/helpers/api/players/getPlayers";
-import CreatePlayerForm from "@/components/Player/CreatePlayerForm";
 import putLoadPlayer from "@/helpers/api/players/putLoadPlayer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import UserContext from "@/helpers/context/admin/UserDetails";
+import CreateRequestForm from "@/components/CreateRequestForm";
 
 interface UserProps {
     _id: string,
@@ -21,9 +21,9 @@ interface UserProps {
     mobileNumber: string,
 }
 
-const SilverDashboard = () => {
+const PlayerDashboard = () => {
     const [players, setPlayers] = useState([]);
-    const linkId = useContext(UserContext)._id
+    const userId = useContext(UserContext)
 
     const handleGetPlayers = useCallback(async () => {
         try {
@@ -45,17 +45,17 @@ const SilverDashboard = () => {
             <div className="flex flex-row justify-between">
                 <Dialog>
                     <DialogTrigger
-                        className="btn-primary-silver border-2 border-black  px-6 py-2 rounded-md text-xs text-black font-semibold">
-                        Register Player
+                        className="btn-primary-player border-2 border-black  px-6 py-2 rounded-md text-xs text-black font-semibold">
+                        Request
                     </DialogTrigger>
-                    <DialogContent className="background-primary-silver">
+                    <DialogContent className="background-primary-player">
                         <DialogHeader>
-                            <DialogTitle>Register Player</DialogTitle>
+                            <DialogTitle>Request</DialogTitle>
                         </DialogHeader>
-                        <CreatePlayerForm/>
+                        <CreateRequestForm variant="player"/>
                     </DialogContent>
                 </Dialog>
-                <CopyLinkButton link="player" variant="silver" id={linkId}/>
+                <CopyLinkButton link="player" variant="silver" id={userId._id}/>
             </div>
             <div className="p-4 bg-black/50 mt-20">
                 <Tabs defaultValue="admin-users" className="w-full text-white ">
@@ -87,7 +87,8 @@ const SilverDashboard = () => {
                                                     <DialogHeader>
                                                         <DialogTitle>Load Player</DialogTitle>
                                                     </DialogHeader>
-                                                    <LoadBalanceForm variant="player" parentId={linkId} _id={user._id}
+                                                    <LoadBalanceForm variant="player" parentId={userId._id}
+                                                                     _id={user._id}
                                                                      handleApi={putLoadPlayer}/>
                                                 </DialogContent>
                                             </Dialog>
@@ -108,4 +109,4 @@ const SilverDashboard = () => {
     )
 }
 
-export default SilverDashboard
+export default PlayerDashboard

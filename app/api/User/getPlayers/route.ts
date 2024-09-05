@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
-import {connect} from "@/helpers/databaseConfig";
+import {connect} from "@/helpers/utils/databaseConfig";
 import Player from "@/models/PlayerDTO";
-import {getDataFromToken} from "@/helpers/getDataFromToken";
+import {getDataFromToken} from "@/helpers/utils/getDataFromToken";
 
 export const GET = async (request: NextRequest) => {
     try {

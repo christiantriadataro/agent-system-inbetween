@@ -1,29 +1,48 @@
 "use client";
 import "./styles.css";
-import menu from "../../public/menu.svg"
-import Image from "next/image";
-import arrowDown from "../../public/down-arrow.svg";
-import {ReactNode, useState} from "react";
+import {ReactNode, useLayoutEffect, useState} from "react";
 import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import {getAdminUserDetails} from "@/helpers/api/admin/getAdminUserDetails";
-import {getPlatinumUserDetails} from "@/helpers/api/PlatinumUsers/getPlatinumUserDetails";
+import UserContext from "@/helpers/context/admin/UserDetails";
 import {getGoldUserDetails} from "@/helpers/api/GoldUsers/getGoldUserDetails";
 
+const initialUserDetails = {
+    _id: "",
+    username: "",
+    balance: 0
+}
+
 const PlatinumLayout = ({children}: Readonly<{ children: ReactNode; }>) => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const handleMenu = () => setIsMenuOpen(!isMenuOpen);
+    // const [isMenuOpen, setIsMenuOpen] = useState(false);
+    // const handleMenu = () => setIsMenuOpen(!isMenuOpen);
+    const [userDetails, setUserDetails] = useState(initialUserDetails);
+
+    const handleGoldUserDetails = async () => {
+        try {
+            const response = await getGoldUserDetails();
+            setUserDetails(response.data.data);
+        } catch (error: any) {
+            console.log(error.message);
+        }
+    }
+
+    useLayoutEffect(() => {
+        handleGoldUserDetails();
+    }, [])
+
+
     return (
-        <div className="background-primary-gold overflow-hidden border border-black h-screen ">
-            <Header handleMenu={handleMenu} handleDetails={getGoldUserDetails} logoutLink="/gold-agent/login"/>
-            <div className="flex flex-row relative h-full">
-                <Sidebar isMenuOpen={isMenuOpen} variant="admin"/>
-                <div
-                    className={`${!isMenuOpen ? "-translate-x-40 " : ""} transition duration-300 w-full`}>
-                    {children}
+        <UserContext.Provider value={userDetails}>
+            <div className="background-primary-gold overflow-hidden border border-black h-screen ">
+                <Header logoutLink="/gold-agent/login"/>
+                <div className="flex flex-row relative h-full">
+                    {/*<Sidebar isMenuOpen={isMenuOpen} variant="admin"/>*/}
+                    <div
+                        className={`transition duration-300 w-full`}>
+                        {children}
+                    </div>
                 </div>
             </div>
-        </div>
+        </UserContext.Provider>
     );
 }
 

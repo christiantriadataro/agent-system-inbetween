@@ -1,18 +1,18 @@
 import {NextRequest, NextResponse} from "next/server";
 import {getDataFromToken} from "@/helpers/utils/getDataFromToken";
-import SilverUser from "@/models/SilverUserDTO"
+import Player from "@/models/PlayerDTO"
 
 export const GET = async (request: NextRequest) => {
     try {
         const loggedId = await getDataFromToken(request);
-        const silverUser = await SilverUser.findOne({_id: loggedId})
+        const playerUser = await Player.findOne({_id: loggedId})
         const response = NextResponse.json({
-            message: "Silver Id Found",
-            data: silverUser
+            message: "Player Found",
+            data: playerUser
         })
         // console.log("getAdminUserDetails route: ", response);
         return response;
     } catch (error: any) {
-        return NextResponse.json({ error: error.message}, { status: 400 })
+        return NextResponse.json({error: error.message}, {status: 400})
     }
 }

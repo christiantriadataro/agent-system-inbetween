@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {connect} from "@/helpers/databaseConfig";
+import {connect} from "@/helpers/utils/databaseConfig";
 import SilverUser from "@/models/SilverUserDTO"
 import jwt from "jsonwebtoken";
 

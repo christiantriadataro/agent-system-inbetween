@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
-import {connect} from "@/helpers/databaseConfig";
+import {connect} from "@/helpers/utils/databaseConfig";
 import PlatinumUser from "@/models/PlatinumUserDTO"
-import {getDataFromToken} from "@/helpers/getDataFromToken";
+import {getDataFromToken} from "@/helpers/utils/getDataFromToken";
 import {useParams} from "next/navigation";
 
 export const POST = async (request: NextRequest) => {

@@ -1,25 +1,15 @@
 "use client";
-import Card from "@/components/Card"
-import CardDownline from "@/components/CardDownline"
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
-import CreatePlatinumUserForm from "@/components/Platinum-Agent/CreatePlatinumUserForm";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import LoadBalanceForm from "@/components/Platinum-Agent/LoadBalanceForm";
-import putLoadAdminUser from "@/helpers/api/admin/putLoadAdminUser";
-import {format} from "@/helpers/format";
-import putLoadPlatinumUser from "@/helpers/api/PlatinumUsers/putLoadPlatinumUser";
-import {useCallback, useEffect, useLayoutEffect, useState} from "react";
-import {getPlatinumUsers} from "@/helpers/api/PlatinumUsers/getPlatinumUsers";
-import getGoldUsers from "@/helpers/api/GoldUsers/getGoldUsers";
-import CreateGoldUserForm from "@/components/Gold-Agent/CreateGoldUserForm";
-import putLoadGoldUser from "@/helpers/api/GoldUsers/putLoadGoldUser";
+import {format} from "@/helpers/utils/format";
+import {useCallback, useContext, useEffect, useState} from "react";
 import getSilverUsers from "@/helpers/api/SilverUsers/getSilverUsers";
 import CreateSilverUserForm from "@/components/Silver-Agent/CreateSilverUserForm";
 import putLoadSilverUser from "@/helpers/api/SilverUsers/putLoadSilverUser";
 import CopyLinkButton from "@/components/CopyLinkButton";
-import {getPlatinumUserDetails} from "@/helpers/api/PlatinumUsers/getPlatinumUserDetails";
-import {getGoldUserDetails} from "@/helpers/api/GoldUsers/getGoldUserDetails";
+import UserContext from "@/helpers/context/admin/UserDetails";
 
 interface UserProps {
     _id: string,
@@ -33,7 +23,9 @@ interface UserProps {
 
 const GoldDashboard = () => {
     const [silverUsers, setSilverUsers] = useState([]);
-    const [linkId, setLinkId] = useState("")
+    const linkId = useContext(UserContext)._id
+
+
     const handleGetSilverUsers = useCallback(async () => {
         try {
             const response = await getSilverUsers();
@@ -44,23 +36,10 @@ const GoldDashboard = () => {
         }
     }, [])
 
-    const handleLinkId = async () => {
-        try {
-            const response = await getGoldUserDetails();
-            console.log("link", response.data.data);
-            setLinkId(response.data.data._id);
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    }
-
     useEffect(() => {
         handleGetSilverUsers();
     }, []);
 
-    useLayoutEffect(() => {
-        handleLinkId()
-    }, []);
 
     return (
         <div className="mx-4 mt-20  h-full">
@@ -105,11 +84,12 @@ const GoldDashboard = () => {
                                                     className="btn-primary-gold border-2 border-black px-4 py-1 rounded-md text-[8px] text-black font-extrabold">
                                                     Load
                                                 </DialogTrigger>
-                                                <DialogContent className="background-primary-plat">
+                                                <DialogContent className="background-primary-silver">
                                                     <DialogHeader>
-                                                        <DialogTitle>Load Platinum User</DialogTitle>
+                                                        <DialogTitle>Load Silver User</DialogTitle>
                                                     </DialogHeader>
-                                                    <LoadBalanceForm _id={user._id} handleApi={putLoadSilverUser}/>
+                                                    <LoadBalanceForm variant="silver" parentId={linkId} _id={user._id}
+                                                                     handleApi={putLoadSilverUser}/>
                                                 </DialogContent>
                                             </Dialog>
                                         </TableCell>
