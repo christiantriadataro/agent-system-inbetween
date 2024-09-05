@@ -8,7 +8,8 @@ import UserContext from "@/helpers/context/admin/UserDetails";
 const initialUserDetails = {
     _id: "",
     username: "",
-    balance: 0
+    balance: 0,
+    parent: ""
 }
 
 
