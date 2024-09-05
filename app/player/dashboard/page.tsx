@@ -23,7 +23,7 @@ interface UserProps {
 
 const PlayerDashboard = () => {
     const [players, setPlayers] = useState([]);
-    const userId = useContext(UserContext)
+    const userDetails = useContext(UserContext)
 
     const handleGetPlayers = useCallback(async () => {
         try {
@@ -42,7 +42,10 @@ const PlayerDashboard = () => {
 
     return (
         <div className="mx-4 mt-20  h-full">
+            <p className="text-2xl text-black">{userDetails._id}</p>
+            <p className="text-2xl text-black">{userDetails.parent}</p>
             <div className="flex flex-row justify-between">
+
                 <Dialog>
                     <DialogTrigger
                         className="btn-primary-player border-2 border-black  px-6 py-2 rounded-md text-xs text-black font-semibold">
@@ -55,7 +58,7 @@ const PlayerDashboard = () => {
                         <CreateRequestForm variant="player"/>
                     </DialogContent>
                 </Dialog>
-                <CopyLinkButton link="player" variant="silver" id={userId._id}/>
+                <CopyLinkButton link="player" variant="silver" id={userDetails._id}/>
             </div>
             <div className="p-4 bg-black/50 mt-20">
                 <Tabs defaultValue="admin-users" className="w-full text-white ">
@@ -87,7 +90,7 @@ const PlayerDashboard = () => {
                                                     <DialogHeader>
                                                         <DialogTitle>Load Player</DialogTitle>
                                                     </DialogHeader>
-                                                    <LoadBalanceForm variant="player" parentId={userId._id}
+                                                    <LoadBalanceForm variant="player" parentId={userDetails._id}
                                                                      _id={user._id}
                                                                      handleApi={putLoadPlayer}/>
                                                 </DialogContent>

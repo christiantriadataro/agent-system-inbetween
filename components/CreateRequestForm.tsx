@@ -27,7 +27,7 @@ const CreateRequestForm = ({variant}: { variant: string }) => {
         ...requestForm,
         to: event.target.value
     })
-    const handleTypeChange = (event: ChangeEvent<HTMLInputElement>) => setRequestForm({
+    const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => setRequestForm({
         ...requestForm,
         type: event.target.value
     })
